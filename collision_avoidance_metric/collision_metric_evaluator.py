@@ -66,7 +66,9 @@ class CollisionAvoidanceMetric():
         """
         gt_point_cloud.rotate_and_update_aabb(direction)
         query_point_cloud.rotate_and_update_aabb(direction, gt_point_cloud.rotated_point_cloud)
+        # breakpoint()
         gt_collision_map = gt_point_cloud.generate_collision_map(gripper, self.outlier_threshold)
+        # breakpoint()
         query_collision_map = query_point_cloud.generate_collision_map(gripper, self.outlier_threshold)
         collision_metrics_results = utils.evaluate_collision_map(
             gt_collision_map,

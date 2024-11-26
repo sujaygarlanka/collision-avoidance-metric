@@ -34,9 +34,11 @@ def _detect_collision_point(
     collision_point = np.nan
     z_points = point_cloud.flatten()
     z_points = np.sort(z_points)
+    # print(len(z_points[~np.isnan(z_points)]))
     if len(z_points[~np.isnan(z_points)]) <= outlier_threshold:
         return collision_point
     diff = z_points[outlier_threshold:] - z_points[:-outlier_threshold]
+    # print(diff)
     collisions = diff < gripper_size
     return z_points[np.argmax(collisions)]
 
@@ -107,6 +109,7 @@ class PointCloud:
         Returns:
             np.array, the collision map - the z-axis coordinate of the collision point for each gripper path
         """
+        # breakpoint()
         # generate the paths
         paths = gripper.generate_paths(self.aabb)
 
@@ -124,6 +127,7 @@ class PointCloud:
                 np.round(aabb_extent[0]).astype(int) + 1
             )
         )
+        # breakpoint()
 
         points_rounded = np.round(points - abb_min_bound).astype(int)
         points_rounded = points_rounded[points_rounded[:, 2].argsort()[::-1]]
@@ -147,14 +151,16 @@ class PointCloud:
                     paths[y, x, 0] - abb_min_bound[0] + gripper.size / 2
                 ).astype(int)
                 pcd_crop = voxel_grid[min_x:max_x, min_y:max_y]
-
+                # breakpoint()
                 # compute the collision point for each path; collision point is
                 # defined as the first moment of intersection of N points,
                 # where N > outlier_threshold
                 collision_point = _detect_collision_point(pcd_crop, gripper.size, outlier_threshold)
                 collision_map[y, x] = collision_point
+                # print(collision_point)
 
         collision_map[collision_map == 0] = np.nan
         self.collision_map = collision_map
         self.paths = paths
+        # breakpoint()
         return collision_map

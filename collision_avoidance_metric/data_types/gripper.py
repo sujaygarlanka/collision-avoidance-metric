@@ -40,6 +40,7 @@ class GripperPaths():
         min_bound = axis_aligned_bounding_box.get_min_bound()
         max_bound = axis_aligned_bounding_box.get_max_bound()
         init_point = np.array([min_bound[0], min_bound[1]]) + self.size / 2
+        # from IPython import embed; embed()
 
         x = np.linspace(
             init_point[0],

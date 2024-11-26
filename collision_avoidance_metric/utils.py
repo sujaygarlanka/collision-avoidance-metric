@@ -73,7 +73,7 @@ def evaluate_collision_map(
 
     y_coords, x_coords = np.where(~np.isinf(ground_truth_map))
     points = np.array(list(zip(x_coords, y_coords)))
-
+    # breakpoint()
     hull = cv2.convexHull(points)
     mask = np.zeros_like(ground_truth_map)
     cv2.fillConvexPoly(mask, hull, 1)
