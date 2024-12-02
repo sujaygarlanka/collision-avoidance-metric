@@ -1,3 +1,0 @@
-/home/sujay/Code/collision-avoidance-metric/build/CMakeFiles/collision-avoidance-metric.dir
-/home/sujay/Code/collision-avoidance-metric/build/CMakeFiles/edit_cache.dir
-/home/sujay/Code/collision-avoidance-metric/build/CMakeFiles/rebuild_cache.dir

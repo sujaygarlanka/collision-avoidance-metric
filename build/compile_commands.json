@@ -1,8 +1,0 @@
-[
-{
-  "directory": "/home/sujay/Code/collision-avoidance-metric/build",
-  "command": "/usr/bin/c++  -I/usr/include/eigen3 -I/usr/local/include/opencv4 -g -std=gnu++17 -o CMakeFiles/collision-avoidance-metric.dir/main.cpp.o -c /home/sujay/Code/collision-avoidance-metric/main.cpp",
-  "file": "/home/sujay/Code/collision-avoidance-metric/main.cpp",
-  "output": "CMakeFiles/collision-avoidance-metric.dir/main.cpp.o"
-}
-]
