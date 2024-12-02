@@ -1,18 +1,11 @@
 #include <opencv2/opencv.hpp>
-// #include <Eigen/Dense>
-// #include <Eigen/Core>
+#include <Eigen/Dense>
+#include <Eigen/Core>
 #include <open3d/Open3D.h>
-// #include <Eigen/Dense>
 #include <iostream>
 
 int main(int argc, char **argv)
 {
-    // Check for valid input arguments
-    // if (argc < 2) {
-    //     std::cerr << "Usage: " << argv[0] << " <image_path>" << std::endl;
-    //     return -1;
-    // }
-
     // Load the input image
     std::string imagePath = "/home/sujay/Code/collision-avoidance-metric/lambo.jpg";
     cv::Mat image = cv::imread(imagePath, cv::IMREAD_COLOR);

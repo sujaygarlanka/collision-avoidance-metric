@@ -7,15 +7,16 @@ set(CMAKE_CXX_STANDARD 17)
 # Add OpenCV include directory
 include_directories(
     /usr/include/eigen3/
-    /usr/local/include/opencv4
+    /usr/include/opencv4
+    /home/sujay/Code/collision-avoidance-metric/include
 )
 
 # Specify the OpenCV static libraries
 set(OpenCV_LIBS
-    /usr/local/lib/libopencv_core.so
-    /usr/local/lib/libopencv_imgproc.so
-    /usr/local/lib/libopencv_imgcodecs.so
-    /usr/local/lib/libopencv_highgui.so
+    /usr/lib/x86_64-linux-gnu/libopencv_core.so
+    /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so
+    /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so
+    /usr/lib/x86_64-linux-gnu/libopencv_highgui.so
     /usr/local/lib/libOpen3D.so
 )
 
@@ -30,7 +31,7 @@ set(Extra_LIBS
 )
 
 # Specify your source files
-add_executable(collision-avoidance-metric main.cpp)
+add_executable(collision-avoidance-metric tests/test.cpp src/GripperPaths.cpp)
 
 # Link the libraries
 target_link_libraries(collision-avoidance-metric ${OpenCV_LIBS} ${Extra_LIBS})
