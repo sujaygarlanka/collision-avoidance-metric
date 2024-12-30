@@ -1,14 +1,40 @@
+#include <variant>
+#include <vector>
+#include <xtensor/xaccumulator.hpp>
+#include <xtensor/xadapt.hpp>
+#include <xtensor/xarray.hpp>
+#include <xtensor/xindex_view.hpp>
+#include <xtensor/xio.hpp>
+#include <xtensor/xsort.hpp>
+#include <xtensor/xtensor_config.hpp>
+#include <xtensor/xview.hpp>
+
+#include "CollisionAvoidanceMetric.h"
+#include "CollisionMetric.h"
 #include "GripperPaths.h"
 
-int main(int argc, char **argv)
-{
+int main(int argc, char** argv) {
+  CollisionAvoidanceMetric evaluator({10}, {Eigen::Vector3d(0.0, 0.0, 0.0)},
+                                     5.0, 10.0, 5.0);
+  auto query_point_cloud = std::make_shared<open3d::geometry::PointCloud>();
+  auto gt_point_cloud = std::make_shared<open3d::geometry::PointCloud>();
 
-    GripperPaths gripper_paths(10.0, 1.0, 0.1);
-    Eigen::Vector3d min_bound(0.0, 0.0, 0.0);
-    Eigen::Vector3d max_bound(1000.0, 1000.0, 1000.0);
-    open3d::geometry::AxisAlignedBoundingBox axisAlignedBoundingBox(min_bound, max_bound);
-    std::vector<std::vector<Eigen::Array2d>> paths = gripperPaths.GeneratePaths(axisAlignedBoundingBox);
-    std::cout << "Number of paths: " << paths.size() << std::endl;
+  // Read the PLY file
+  open3d::io::ReadPointCloud(
+      "/home/sujay/Code/collision-avoidance-metric/test/data_qp.ply",
+      *query_point_cloud);
+  open3d::io::ReadPointCloud(
+      "/home/sujay/Code/collision-avoidance-metric/test/data_gt.ply",
+      *gt_point_cloud);
+  auto collision_metrics =
+      evaluator.ComputeCollisionMetrics(*query_point_cloud, *gt_point_cloud);
+  for (const auto& outer_pair : collision_metrics) {
+    std::cout << outer_pair.first << "\n";
+    for (const auto& inner_pair : outer_pair.second) {
+      std::cout << "   " << inner_pair.first << " : " << inner_pair.second
+                << "\n";
+    }
+  }
 
-    return 0;
+  return 0;
 }
