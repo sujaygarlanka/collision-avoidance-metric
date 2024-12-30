@@ -1,17 +1,4 @@
-#include <variant>
-#include <vector>
-#include <xtensor/xaccumulator.hpp>
-#include <xtensor/xadapt.hpp>
-#include <xtensor/xarray.hpp>
-#include <xtensor/xindex_view.hpp>
-#include <xtensor/xio.hpp>
-#include <xtensor/xsort.hpp>
-#include <xtensor/xtensor_config.hpp>
-#include <xtensor/xview.hpp>
-
 #include "CollisionAvoidanceMetric.h"
-#include "CollisionMetric.h"
-#include "GripperPaths.h"
 
 int main(int argc, char** argv) {
   CollisionAvoidanceMetric evaluator({10}, {Eigen::Vector3d(0.0, 0.0, 0.0)},
